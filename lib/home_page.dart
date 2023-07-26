@@ -15,20 +15,32 @@ class _MyHomePageState extends State<MyHomePage> {
     BuildContext context,
   ) {
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.blue,
-          title: const Text('Daryo Uz'),
+      child: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.blue,
+            title: const Text('Daryo Uz'),
+            bottom: const TabBar(tabs: [
+              Tab(child: Text("Asosiy")),
+              Tab(child: Text("Asosiy")),
+              Tab(child: Text("Asosiy")),
+            ]),
+          ),
+          drawer: Drawer(child: getDrawerChild()),
+          body: TabBarView(children: [
+            ListView.builder(
+                itemCount: list.length,
+                itemBuilder: (
+                  BuildContext context,
+                  int index,
+                ) {
+                  return card(list[index], context);
+                }),
+            const Text("2"),
+            const Text("this=3")
+          ]),
         ),
-        drawer: Drawer(child: getDrawerChild()),
-        body: ListView.builder(
-            itemCount: list.length,
-            itemBuilder: (
-              BuildContext context,
-              int index,
-            ) {
-              return card(list[index], context);
-            }),
       ),
     );
   }
@@ -51,25 +63,25 @@ Widget card(Malumotlar data, BuildContext context) {
             children: [
               Text(
                 data.type,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 15,
                     color: Colors.blue,
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 120,
               ),
-              Text(data.hours, style: TextStyle(color: Colors.black26)),
-              Text(
+              Text(data.hours, style: const TextStyle(color: Colors.black26)),
+              const Text(
                 " | ",
                 style: TextStyle(color: Colors.black26),
               ),
-              Text(data.days, style: TextStyle(color: Colors.black26)),
-              Text(
+              Text(data.days, style: const TextStyle(color: Colors.black26)),
+              const Text(
                 " | ",
                 style: TextStyle(color: Colors.black26),
               ),
-              Icon(
+              const Icon(
                 Icons.remove_red_eye,
                 color: Colors.blue,
               ),
@@ -93,8 +105,8 @@ Widget card(Malumotlar data, BuildContext context) {
                     width: 250,
                     child: Text(
                       data.about,
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold),
                       maxLines: 4,
                     ),
                   ),
@@ -111,47 +123,133 @@ Widget card(Malumotlar data, BuildContext context) {
 ListView getDrawerChild() {
   return ListView(
     children: [
-      const DrawerHeader(
-        decoration: BoxDecoration(
-          color: Colors.red,
-          image: DecorationImage(
-            image: NetworkImage(
-              "https://daryo.uz/static/2023/07/thumb-64a8fbc0da5f0.jpg",
-            ),
-            fit: BoxFit.fill,
-          ),
-        ),
-        child: Stack(
+      DrawerHeader(
+        decoration: const BoxDecoration(color: Colors.blue),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Positioned(
-              bottom: 8.0,
-              left: 4.0,
-              child: Text(
-                "Daryo Uz",
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
+            Row(
+              children: [
+                const Text(
+                  "Daryo ",
+                  style: TextStyle(color: Colors.white, fontSize: 24),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Container(
+                  height: 30,
+                  child: OutlinedButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          const Text(
+                            "krilcha   ",
+                          ),
+                          Container(
+                            height: double.infinity,
+                            width: 1,
+                            color: Colors.white,
+                          ),
+                          const Text(
+                            "   lotincha  ",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      )),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Toshkent",
+                  style: TextStyle(color: Colors.white),
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.filter_drama,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      "+12",
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
+              ],
+            ),
+            const Divider(
+              thickness: 1.0,
+              color: Colors.white,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.euro_rounded,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      "1223.34",
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.euro_rounded,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      "1223.34",
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.euro_rounded,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      "1223.34",
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
+              ],
             )
           ],
         ),
       ),
       ListTile(
-        leading: Icon(Icons.home),
-        title: Text("Home"),
+        leading: const Icon(Icons.home),
+        title: const Text("Home"),
         onTap: () {},
       ),
       ListTile(
-        leading: Icon(Icons.account_box),
-        title: Text("About"),
+        leading: const Icon(Icons.account_box),
+        title: const Text("About"),
         onTap: () {},
       ),
       ListTile(
-        leading: Icon(Icons.grid_3x3_outlined),
-        title: Text("Products"),
+        leading: const Icon(Icons.grid_3x3_outlined),
+        title: const Text("Products"),
         onTap: () {},
       ),
       ListTile(
-        leading: Icon(Icons.contact_mail),
-        title: Text("Contact"),
+        leading: const Icon(Icons.contact_mail),
+        title: const Text("Contact"),
         onTap: () {},
       )
     ],
